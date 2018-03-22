@@ -26,4 +26,15 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
+  
+ 
+  def feed_microposts
+    puts '◆feed_microposts'
+    puts self.following_ids
+    puts '■■■■■'
+    puts [self.id]
+    puts '▲▲▲▲▲'
+    Micropost.where(user_id: self.following_ids + [self.id]) #idsはfollowingユーザーのidの配列
+  end
+  
 end
