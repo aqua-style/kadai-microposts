@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
   
   def index
     @users = User.all.page(params[:page])
@@ -26,6 +26,22 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def followings
+    @user = User.find(params[:id])
+    puts 'params[:id]は' +  params[:id]
+    @followings = @user.followings.page(params[:page]) #app/models/user.rbのhas_manyで使えるようになったfollowingsメソッド
+    counts(@user) #ツイート数、フォロワー数、フォロー数を全部とってくる
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    puts 'params[:id]は' +  params[:id]
+    @followers = @user.followers.page(params[:page]) #app/models/user.rbのhas_manyで使えるようになったfollowersメソッド
+    counts(@user) #ツイート数、フォロワー数、フォロー数を全部とってくる
+  end
+
+
 
   private
 

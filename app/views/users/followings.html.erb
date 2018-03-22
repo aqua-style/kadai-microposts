@@ -1,4 +1,5 @@
-<!--ユーザーのshow。左側にアバターがあって、右側に3タブ（ツイート／フォロー／フォロワー）-->
+<!--ユーザーshowのフォロー画面。左側にアバターがあって、右側に3タブ（ツイート／フォロー／フォロワー）-->
+
 <div class="row">
   <aside class="col-xs-4">
     <div class="panel panel-default">
@@ -17,6 +18,6 @@
       <li class="<%= 'active' if current_page?(followings_user_path(@user)) %>"><%= link_to followings_user_path(@user) do %>Followings <span class="badge"><%= @count_followings %></span><% end %></li>
       <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>Followers <span class="badge"><%= @count_followers %></span><% end %></li>
     </ul>
-    <%= render 'microposts/microposts', microposts: @microposts %>
+    <%= render 'users', users: @followings %>
   </div>
 </div>

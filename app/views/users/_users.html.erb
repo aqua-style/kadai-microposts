@@ -1,3 +1,4 @@
+<!-- ユーザーの一覧を表示する部分-->
 <% if users.any? %>
   <ul class="media-list">
     <% users.each do |user| %>
@@ -7,9 +8,11 @@
         </div>
         <div class="media-body">
           <div>
+            <!--ここどこ1-->
             <%= user.name %>
           </div>
           <div>
+            <!--ここどこ2-->
             <p><%= link_to 'View profile', user_path(user) %></p>
           </div>
         </div>
