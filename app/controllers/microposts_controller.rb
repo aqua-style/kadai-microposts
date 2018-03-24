@@ -15,6 +15,13 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    #micropostを削除するときに、okiniirisテーブルにあるすべてのmicropostも同時に削除したい
+    #okinis = Okiniiri.where(micropost_id: @micropost.id)
+    #okinis.each do |okini|
+    #  puts okini
+    #  okini.destroy if okini
+    #end
+
     @micropost.destroy
     flash[:success] = 'メッセージを削除しました。'
     redirect_back(fallback_location: root_path)

@@ -22,6 +22,6 @@
       <li class="<%= 'active' if current_page?(okiniiris_user_path(@user)) %>"><%= link_to okiniiris_user_path(@user) do %>
       お気に入り <span class="badge"><%= @count_okiniiris %></span><% end%></li>
     </ul>
-    <%= render 'microposts/microposts', microposts: @microposts %>
+    <%= render 'microposts/microposts', microposts: @okinis %>
   </div>
 </div>

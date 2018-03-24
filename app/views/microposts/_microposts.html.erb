@@ -9,11 +9,23 @@
           <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
         </div>
         <div>
-          <p><%= micropost.content %></p>
-        </div>
-        <div>
+          <p><%= micropost.content %>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
+          </p>
+        </div>
+        <div>
+          <% if current_user.mou_okini?(micropost) %>
+          <!-- すでにお気に入りなら外すボタン -->
+            <%= link_to 'お気に外し', okiniiri_path(micropost), method: :delete, class: 'btn btn-warning btn-xs' %>
+          <% elsif %>
+          <!-- まだお気に入りでないなら -->
+          <!--form_forに渡すものは？モデルなのでokiniiriを渡したい-->
+            <%= form_for(current_user.okiniiris.build) do |f| %>
+              <%= hidden_field_tag :micropost_id, micropost.id %>
+              <%= f.submit 'お気に入り', class: 'btn btn-info btn-xs' %>
+            <% end %>
           <% end %>
         </div>
       </div>

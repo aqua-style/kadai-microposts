@@ -41,7 +41,11 @@ class UsersController < ApplicationController
     counts(@user) #ツイート数、フォロワー数、フォロー数を全部とってくる
   end
 
-
+  def okiniiris
+    @user = User.find(params[:id]) #URLの/user/2のIDでユーザーを探してインスタンスを入れる
+    @okinis = @user.get_okini_microposts.order('created_at DESC').page(params[:page]) #お気に入りテーブルの先にあるmicropostsインスタンスを取得 #okinisだとエラーがでるけど、@okinisだとエラーが出ないなぜ？
+    counts(@user)
+  end
 
   private
 

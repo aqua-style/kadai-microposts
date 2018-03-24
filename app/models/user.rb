@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
+  
+  has_many :okiniiris #kadai2 中間テーブルで|user_id|micropost_id|
+  has_many :get_okini_microposts, through: :okiniiris, source: :micropost #中間テーブルを通してその先のmicropost達のインスタンスをゲット
 
   def follow(other_user)
     unless self == other_user
@@ -27,7 +30,7 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
   
- 
+  #タイムライン用の混在マイクロポスト取得メソッド
   def feed_microposts
     puts '◆feed_microposts'
     puts self.following_ids
@@ -36,5 +39,23 @@ class User < ApplicationRecord
     puts '▲▲▲▲▲'
     Micropost.where(user_id: self.following_ids + [self.id]) #idsはfollowingユーザーのidの配列
   end
+  
+  #マイクロポストをお気に入りに登録
+  def okini_toroku(micropost_id)
+    self.okiniiris.find_or_create_by(micropost_id: micropost_id)
+  end
+  
+  #マイクロポストをお気に入りから外す
+  def okini_hazusi(micropost_id)
+    aru = self.okiniiris.find_by(micropost_id: micropost_id)
+    puts 'aru?'
+    puts aru
+    aru.destroy if aru
+  end
+  
+  #すでにお気に入り済かをチェック
+  def mou_okini?(micropost)
+    self.get_okini_microposts.include?(micropost) #micropost_idじゃなくmicropostオブジェクト
+  end  
   
 end
