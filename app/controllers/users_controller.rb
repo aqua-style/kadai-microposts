@@ -1,14 +1,27 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+
+
+  # 第一引数にテキスト、第二にパスを入れる
+  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'ユーザー一覧', :users_path
   
   def index
     @users = User.all.page(params[:page])
   end
 
   def show
+    
+    
     @user = User.find(params[:id])
     @microposts = @user.microposts.order('created_at DESC').page(params[:page])
     counts(@user)
+
+    @kiji_title = @user.name
+    # 第二引数を省くとリンクではない階層を作れる、最後の階層はパスを入れてもリンクにならない
+    add_breadcrumb @kiji_title, :user_path
+
+
   end
 
   def new

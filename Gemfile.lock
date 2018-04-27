@@ -41,6 +41,7 @@ GEM
     arel (7.1.4)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (10.0.0)
     coffee-rails (4.2.2)
@@ -57,6 +58,8 @@ GEM
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gretel (3.0.9)
+      rails (>= 3.1.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -174,8 +177,10 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  breadcrumbs_on_rails
   byebug
   coffee-rails (~> 4.2)
+  gretel
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

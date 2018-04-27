@@ -58,3 +58,7 @@ gem 'kaminari'
 group :production do
   gem 'pg', '0.21.0'
 end
+
+#パンくず
+gem 'gretel'
+gem 'breadcrumbs_on_rails'

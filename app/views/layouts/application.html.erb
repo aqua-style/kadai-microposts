@@ -19,7 +19,7 @@
 
     <div class="container">
       <%= render 'layouts/flash_messages' %>
-
+      <%= render_breadcrumbs builder: ::CustomBreadcrumbsBuilder %>
       <%= yield %>
     </div>
   </body>
