@@ -23,7 +23,7 @@ module Microoposts
     # -- all .rb files in that directory are automatically loaded.
 
   #lib以下の自作クラスを読ませるため
-  # to auto load lib/ directory
+  # herokuでは読まれないのでconfig/environments/production.rbをいじる
   config.autoload_paths += %W(#{config.root}/lib)
 
 
